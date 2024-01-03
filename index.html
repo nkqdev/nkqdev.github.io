@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO</title>
+  </head>
+  <body>
+    <h1>Socket.IO</h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="sendMessage.js"></script>
+    <script>
+      const socket = io();
+      // Sự kiện khi nút được nhấp
+      function sendMessage() {
+        const roomId = document.getElementById("roomIdInput").value;
+        socket.emit("SUPPORTER_SEND_NEW_MESSAGE", {
+          roomId: roomId,
+        });
+      }
+      // Sự kiện khi nhận được tin nhắn từ server
+      socket.on("SUPPORTER_HAVE_NEW_MESSAGE", () =>
+        console.log("user sent message")
+      );
+
+      function joinRoom() {
+        const roomId = document.getElementById("roomIdInput").value;
+        console.log(roomId);
+        socket.emit("JOIN_ROOM", { roomId: roomId, connection: "supporter" });
+      }
+    </script>
+    <input type="text" id="messageInput" placeholder="Enter your message" />
+    <button onclick="sendMessage()">Send Message</button>
+    <input type="text" id="roomIdInput" placeholder="Enter your message" />
+    <button onclick="joinRoom()">Join Room</button>
+  </body>
+</html>
