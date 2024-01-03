@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
 });
 
 // Lắng nghe cổng 3000
-const HOST = "192.168.101.102";
+const HOST = "https://nkqdev.github.io/";
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Server listening on http://${HOST}:${PORT}`);
